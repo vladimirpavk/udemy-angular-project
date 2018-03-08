@@ -3,7 +3,7 @@
         <button class="btn btn-success">New Recipe</button>
     </div>
 </div>
-
+<hr>
 <div class="row"  *ngFor="let recipe of recipes">    
-    <app-recipe-item [name]="recipe.name" [description]="recipe.description" [imagePath]="recipe.imagePath"></app-recipe-item>
+    <app-recipe-item [recipe]="recipe"></app-recipe-item>
 </div>

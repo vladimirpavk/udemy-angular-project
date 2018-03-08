@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-item',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipeItemComponent implements OnInit {
 
+  @Input() name: string;
+  @Input() description: string;
+  @Input() imagePath: string;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.name+" - "+this.description+" - "+this.imagePath);
   }
 
 }

@@ -13,7 +13,7 @@ export class RecipeItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.recipe.name+" - "+this.recipe.description+" - "+this.recipe.imagePath);
+    //console.log(this.recipe.name+" - "+this.recipe.description+" - "+this.recipe.imagePath);
   }
 
 }

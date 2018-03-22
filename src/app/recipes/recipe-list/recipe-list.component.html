@@ -1,9 +1,19 @@
-<div class="row">
-    <div class="col-xs-12">
-        <button class="btn btn-success">New Recipe</button>
+<div class="panel panel-info">
+    <div class="panel panel-heading">Recipe List Component</div>
+    <div class="panel-body">
+        <div class="row">    
+            <div class="col-xs-12">
+                <button class="btn btn-success">New Recipe</button>
+            </div>
+        </div>
+        <hr>
+        <div class="panel panel-info">
+            <div class="panel panel-heading">Recipe Item Components List</div>
+            <div class="panel-body">
+              <div class="row"  *ngFor="let recipe of recipes">    
+                 <app-recipe-item [recipe]="recipe"></app-recipe-item>
+              </div>
+            </div>    
+        </div>
     </div>
-</div>
-<hr>
-<div class="row"  *ngFor="let recipe of recipes">    
-    <app-recipe-item [recipe]="recipe"></app-recipe-item>
 </div>

@@ -16,13 +16,11 @@ export class HeaderComponent implements OnInit {
     
   }
 
-  public onRecipeItemClicked():void{
-    console.log("header.component - recipe item clicked");
+  public onRecipeItemClicked():void{    
     this.RecipeItemClicked.emit();
   }
 
   public onShopingListItemClicked():void{
-    console.log("header.component - shopping list clicked");
     this.ShopingListItemClicked.emit();
   }
 }

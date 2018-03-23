@@ -11,7 +11,7 @@
             <div class="panel panel-heading">Recipe Item Components List</div>
             <div class="panel-body">
               <div class="row"  *ngFor="let recipe of recipes">    
-                 <app-recipe-item [recipe]="recipe"></app-recipe-item>
+                 <app-recipe-item [recipe]="recipe" (click)="recipeItemClicked(recipe)"></app-recipe-item>
               </div>
             </div>    
         </div>

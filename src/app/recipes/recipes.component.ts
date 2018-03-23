@@ -8,7 +8,7 @@ import { Recipe } from './recipe.model';
 })
 export class RecipesComponent implements OnInit {
 
-  public recipe: Recipe= new Recipe('Default name', 'Default description', 'Default image');
+  public recipe: Recipe;
 
   constructor() { }
 

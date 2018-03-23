@@ -11,16 +11,17 @@ export class AppComponent {
   public recipesVisible: boolean = true;
   public shoppingListVisible: boolean = false;
 
-   public onRecipeItemClicked():void{
-    if(this.recipesVisible) return;
-    this.recipesVisible=false;
-    this.shoppingListVisible=true;
+   public onRecipeClicked():void{  
+      if(!this.recipesVisible){      
+        this.recipesVisible=true;
+        this.shoppingListVisible=false;        
+      }
   }
 
-  public onShopingListItemClicked():void{
-    if(this.shoppingListVisible) return;
-    this.shoppingListVisible=false;
-    this.recipesVisible=true;
+  public onShoppingListClicked():void{      
+      if(!this.shoppingListVisible) {
+        this.shoppingListVisible=true;
+        this.recipesVisible=false;
+      }      
   }
-
 }

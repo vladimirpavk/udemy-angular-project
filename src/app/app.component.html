@@ -1,10 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-header (RecipeItemClicked)="onRecipeClicked()" (ShopingListItemClicked)="onShoppingListClicked()"></app-header>
+<app-header></app-header>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <app-recipes *ngIf="recipesVisible"></app-recipes>
-      <app-shopping-list *ngIf="shoppingListVisible"></app-shopping-list>
+    <div class="col-md-12">     
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

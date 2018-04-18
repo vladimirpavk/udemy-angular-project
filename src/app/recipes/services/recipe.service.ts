@@ -10,6 +10,7 @@ export class RecipeService{
 
     private recipes: Recipe[] = [
         new Recipe(
+            1,
             'A Test Recipe', 
             'This is simply a test', 
             'http://maxpixel.freegreatpicture.com/static/photo/1x/Recipe-Soup-Noodle-Curried-Spicy-Chicken-Khaosoi-2344152.jpg',
@@ -19,6 +20,7 @@ export class RecipeService{
             ]
         ),
         new Recipe(
+            2,
             'Recipe 2', 
             'Mushrooms Recipe Kitchen French Dish', 
             'http://maxpixel.freegreatpicture.com/static/photo/1x/Mushrooms-Recipe-Kitchen-French-Dish-2459679.jpg',
@@ -31,5 +33,12 @@ export class RecipeService{
     
     public getRecipes():Recipe[]{
         return this.recipes.slice();
+    }
+
+    public getRecipeById(recipeId: number):Recipe{
+        return this.recipes.find(
+            (recipe)=>{
+                return recipe.id === recipeId;
+            });
     }
 }

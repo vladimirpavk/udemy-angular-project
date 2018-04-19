@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { ShoppingListService } from '../../shopping-list/services/shopping-list.service';
 import { Ingridient } from '../../shared/ingridient.model';
@@ -18,7 +18,7 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit() {
     //console.log(this.route.snapshot.data['recipe']);
-    this.recipe=this.route.snapshot.data['recipe'];
+    //this.recipe=this.route.snapshot.data['recipe'];
     this.route.data.subscribe((data:Data)=>{
       this.recipe=data['recipe'];
     })

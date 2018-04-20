@@ -6,7 +6,7 @@ import { Ingridient } from '../../shared/ingridient.model';
 
 export class RecipeService{
     
-    public recipeSelected:EventEmitter<Recipe> = new EventEmitter<Recipe>();
+    //public recipeSelected:EventEmitter<Recipe> = new EventEmitter<Recipe>();
 
     private recipes: Recipe[] = [
         new Recipe(

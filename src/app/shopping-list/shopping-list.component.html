@@ -5,7 +5,7 @@
     <ul class="list-group">
       <a class="list-group-item"
         style="cursor: pointer"
-        *ngFor="let ingridient of ingridients">
+        *ngFor="let ingridient of ingridients; let id = index" (click)="itemClicked(id)">
         {{ingridient.name}} ({{ingridient.amount}})
       </a>
     </ul>

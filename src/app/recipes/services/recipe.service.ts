@@ -2,11 +2,14 @@ import { EventEmitter } from '@angular/core';
 
 import { Recipe } from '../recipe.model';
 import { Ingridient } from '../../shared/ingridient.model';
+import { Subject } from 'rxjs/Subject';
 
 
 export class RecipeService{
     
     //public recipeSelected:EventEmitter<Recipe> = new EventEmitter<Recipe>();
+
+    public newRecipeAdded:Subject<Recipe>=new Subject<Recipe>();
 
     private recipes: Recipe[] = [
         new Recipe(
@@ -40,5 +43,10 @@ export class RecipeService{
             (recipe)=>{
                 return recipe.id === recipeId;
             });
+    }
+
+    public addRecipe(recipe:Recipe):void{
+        this.recipes.push(recipe);
+        this.newRecipeAdded.next(recipe);
     }
 }

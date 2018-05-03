@@ -9,7 +9,7 @@ export class RecipeService{
     
     //public recipeSelected:EventEmitter<Recipe> = new EventEmitter<Recipe>();
 
-    public newRecipeAdded:Subject<Recipe>=new Subject<Recipe>();
+    public recipesChanged:Subject<Recipe[]>=new Subject<Recipe[]>();    
 
     private recipes: Recipe[] = [
         new Recipe(    
@@ -40,13 +40,13 @@ export class RecipeService{
         return this.recipes[recipeId];
     }
 
-    public addRecipe(recipe:Recipe):void{
+    public addNewRecipe(recipe:Recipe):void{       
         this.recipes.push(recipe);
-        this.newRecipeAdded.next(recipe);
+        this.recipesChanged.next(this.recipes.slice());
     }
 
     public deleteRecipe(id:number){
         this.recipes=this.recipes.slice(id, 1);
-        this.newRecipeAdded.next();
+        this.recipesChanged.next(this.recipes.slice());
     }
 }

@@ -11,14 +11,11 @@ import { ActivatedRoute, Data } from '@angular/router';
 })
 export class RecipeDetailComponent implements OnInit {
 
-  //@Input() public recipe: Recipe;
-  public recipe: Recipe;
+   public recipe: Recipe;
 
   constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    //console.log(this.route.snapshot.data['recipe']);
-    //this.recipe=this.route.snapshot.data['recipe'];
+  ngOnInit() {   
     this.route.data.subscribe((data:Data)=>{
       this.recipe=data['recipe'];
     })

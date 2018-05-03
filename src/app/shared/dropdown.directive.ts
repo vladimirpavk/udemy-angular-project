@@ -13,8 +13,7 @@ export class DropdownDirective implements OnInit{
 
   constructor() { }
 
-  ngOnInit(){
-    console.log("initialized");
+  ngOnInit(){    
   }
 
 }

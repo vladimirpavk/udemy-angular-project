@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { RecipeService } from '../services/recipe.service';
 import { Recipe } from '../recipe.model';
 
@@ -35,6 +35,7 @@ export class RecipeEditComponent implements OnInit {
       name: '',
       description: '',
       imagePath: '',
+      ingridients: new FormArray([])
     };
 
     if(this.editMode){
@@ -42,12 +43,25 @@ export class RecipeEditComponent implements OnInit {
       formData.name=recipeTemp.name;
       formData.description=recipeTemp.description;
       formData.imagePath=recipeTemp.imagePath;
+
+      if(recipeTemp.ingridients)
+      {
+        for(let ingridient of recipeTemp.ingridients){
+          formData.ingridients.push(
+            new FormGroup({
+              'name': new FormControl(ingridient.name),
+              'amount': new FormControl(ingridient.amount)
+            })
+          );
+        }
+      }
     }
 
     this.recipeForm=new FormGroup({
       'name': new FormControl(formData.name),
       'description': new FormControl(formData.description),
-      'imagePath': new FormControl(formData.imagePath)    
+      'imagePath': new FormControl(formData.imagePath),
+      'ingridients': formData.ingridients
     });
   }
 

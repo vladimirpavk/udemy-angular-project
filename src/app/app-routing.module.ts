@@ -12,7 +12,7 @@ const appRoutes:Route[] = [
     { path: 'shoppinglist', component: ShoppingListComponent },
     { path: 'recipes', component: RecipesComponent, children: [
         { path: 'new', component: RecipeEditComponent },
-        { path: ':id', component: RecipeDetailComponent, resolve: {'recipe': RecipeResolveService} },        
+        { path: ':id', component: RecipeDetailComponent }, // resolve: {'recipe': RecipeResolveService} },        
         { path: ':id/edit', component: RecipeEditComponent },
         { path: '', component: RecipeSelectComponent, pathMatch: "full"}
     ] },

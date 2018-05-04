@@ -49,4 +49,9 @@ export class RecipeService{
         this.recipes=this.recipes.slice(id, 1);
         this.recipesChanged.next(this.recipes.slice());
     }
+
+    public updateRecipe(id:number, newRecipe:Recipe):void{
+        this.recipes[id]=newRecipe;
+        this.recipesChanged.next(this.recipes.slice());
+    }
 }

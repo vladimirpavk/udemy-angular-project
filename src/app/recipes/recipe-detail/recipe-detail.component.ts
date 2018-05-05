@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { ShoppingListService } from '../../shopping-list/services/shopping-list.service';
 import { Ingridient } from '../../shared/ingridient.model';
-import { ActivatedRoute, Data, Params } from '@angular/router';
+import { ActivatedRoute, Data, Params, Router } from '@angular/router';
 import { RecipeService } from '../services/recipe.service';
 
 @Component({
@@ -13,14 +13,23 @@ import { RecipeService } from '../services/recipe.service';
 export class RecipeDetailComponent implements OnInit {
 
   public recipe: Recipe;
+  public recipeId:number;
 
-  constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute, private recipeService: RecipeService) { }
+  constructor(private shoppingListService: ShoppingListService, 
+    private route: ActivatedRoute, 
+    private recipeService: RecipeService,
+    private router:Router) { }
 
   ngOnInit() {   
     this.route.params.subscribe((params:Params)=>{  
-      this.recipe=this.recipeService.getRecipeById(+params['id']);
-      console.log(this.recipeService.getRecipeById(+params['id']));
+      this.recipeId=+params['id'];     
+      this.recipe=this.recipeService.getRecipeById(this.recipeId);      
     });
+  }
+
+  deleteRecipe(){
+    this.recipeService.deleteRecipe(this.recipe);
+    this.router.navigate(['../']);
   }
 
   private toShoppingListClicked():void{

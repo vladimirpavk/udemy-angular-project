@@ -23,8 +23,24 @@ export class ShoppingListService{
     }
 
     public addIngridient(ingridient:Ingridient):void{
-        this.ingridients.push(ingridient);
-        this.newIngridientAdded.next(this.ingridients.slice());
+        //this.ingridients.push(ingridient);
+        let found:boolean=false;
+        this.ingridients.find(
+            (ingridientEl:Ingridient)=>{
+                if(ingridientEl.name===ingridient.name){
+                    this.ingridients[this.ingridients.indexOf(ingridientEl)].amount+=ingridient.amount;
+                    this.newIngridientAdded.next(this.ingridients.slice());
+                    found=true;
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        );
+        if(!found){
+            this.ingridients.push(ingridient);            
+        }
     }
 
     public updateIngridient(ingridient:Ingridient):void{

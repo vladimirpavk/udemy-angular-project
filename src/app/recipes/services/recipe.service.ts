@@ -61,4 +61,9 @@ export class RecipeService{
         this.recipesChanged.next(this.recipes.slice());
     }
 
+    public putRecipes(recipes:Recipe[]):void{
+        this.recipes=recipes;
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
 }

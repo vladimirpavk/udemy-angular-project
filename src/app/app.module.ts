@@ -19,8 +19,10 @@ import { RecipeResolveService } from './recipes/services/recipe-resolve.service'
 import { RecipeService } from './recipes/services/recipe.service';
 import { RecipeSelectComponent } from './recipes/recipe-select/recipe-select.component';
 import { HttpService } from './shared/http.service';
-import { SingupComponent } from './auth/singup/singup.component';
-import { SinginComponent } from './auth/singin/singin.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AuthService } from './auth/auth.service';
+import { RecipeEditGuard } from './recipes/recipe-edit/recipe-edit.guard.service';
 
 @NgModule({
   declarations: [
@@ -35,8 +37,9 @@ import { SinginComponent } from './auth/singin/singin.component';
     DropdownDirective,
     RecipeEditComponent,
     RecipeSelectComponent,
-    SingupComponent,
-    SinginComponent    
+    SigninComponent,
+    SignupComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,7 @@ import { SinginComponent } from './auth/singin/singin.component';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [ShoppingListService, RecipeResolveService, RecipeService, HttpService],
+  providers: [ShoppingListService, RecipeResolveService, RecipeService, HttpService, AuthService, RecipeEditGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

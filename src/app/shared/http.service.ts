@@ -11,7 +11,7 @@ export class HttpService{
     constructor(private httpService:Http){}
     
     public storeRecipes(recipes:Recipe[]):Observable<Response>{
-        return this.httpService.put(this.targetUrl, recipes);
+        return this.httpService.put(this.targetUrl, recipes);        
     }
 
     public loadRecipes():Observable<Response>{

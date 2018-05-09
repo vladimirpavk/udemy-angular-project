@@ -7,6 +7,7 @@ import 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   constructor(private recipeService: RecipeService,
               private httpService: HttpService,
-              private authService: AuthService  ) { }
+              private authService: AuthService,
+              private router: Router  ) { }
 
   ngOnInit() {    
     this.subs = this.authService.loggedInStatusChanged.subscribe(
@@ -62,5 +64,6 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   logoutButtonClicked(){
     this.authService.logoutUser();
+    this.router.navigate(['/recipes']);
   }
 }

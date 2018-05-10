@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RecipeService } from '../recipes/services/recipe.service';
-import { HttpService } from '../shared/http.service';
+import { RecipeService } from '../../recipes/services/recipe.service';
+import { HttpService } from '../../shared/http.service';
 import { Response } from '@angular/http';
-import { Recipe } from '../recipes/recipe.model';
+import { Recipe } from '../../recipes/recipe.model';
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 

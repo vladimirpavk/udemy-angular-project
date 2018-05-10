@@ -9,17 +9,19 @@ import { RecipeSelectComponent } from './recipe-select/recipe-select.component';
 import { RecipeEditGuard } from './recipe-edit/recipe-edit.guard.service';
 
 export const recipeRoutes:Route[] = [    
-    { path: 'recipes', component: RecipesComponent, children: [
+    { path: 'recipes', component: RecipesComponent, children: [        
         { path: 'new', component: RecipeEditComponent, canActivate: [ RecipeEditGuard ] },
         { path: ':id', component: RecipeDetailComponent }, // resolve: {'recipe': RecipeResolveService} },        
         { path: ':id/edit', component: RecipeEditComponent, canActivate: [ RecipeEditGuard ] },
-        { path: '', component: RecipeSelectComponent, pathMatch: "full"} ]
+        { path: '', component: RecipeSelectComponent, pathMatch: 'full' }
+    ]
     }
 ];
 
 @NgModule({
     imports: [ RouterModule.forChild(recipeRoutes)],
-    exports: [ RouterModule ]
+    exports: [ RouterModule ],
+    providers: [ RecipeEditGuard ]
 })
 export class RecipesRoutingModule {
 

@@ -9,7 +9,7 @@ import { RecipeSelectComponent } from './recipe-select/recipe-select.component';
 import { RecipeEditGuard } from './recipe-edit/recipe-edit.guard.service';
 
 export const recipeRoutes:Route[] = [    
-    { path: '', component: RecipesComponent, children: [        
+    { path: 'recipes', component: RecipesComponent, children: [        
         { path: 'new', component: RecipeEditComponent, canActivate: [ RecipeEditGuard ] },
         { path: ':id', component: RecipeDetailComponent }, // resolve: {'recipe': RecipeResolveService} },        
         { path: ':id/edit', component: RecipeEditComponent, canActivate: [ RecipeEditGuard ] },

@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
 
   onFetchDataClicked(){
-    this.httpService.loadRecipes().map(
+   /*this.httpService.loadRecipes().map(
       (response:Response)=>{
         let recipes:Recipe[] = <Recipe[]>(response.json());
         for(let x of recipes){
@@ -51,16 +51,19 @@ export class HeaderComponent implements OnInit,OnDestroy {
       (response:Recipe[])=>{        
         this.recipeService.putRecipes(response);
       }
-    );   
+    );   */
+    this.httpService.loadRecipes().subscribe(
+      (recipes: Recipe[])=>{
+        console.log(recipes);
+      });    
   }
 
-  onSaveDataClicked(){
+  /*onSaveDataClicked(){
     this.httpService.storeRecipes(this.recipeService.getRecipes()).subscribe(
       (response:Response)=>{
         console.log(response);
       }
-    )
-  }
+    )*/  
 
   logoutButtonClicked(){
     this.authService.logoutUser();

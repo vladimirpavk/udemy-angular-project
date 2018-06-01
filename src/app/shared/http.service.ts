@@ -11,25 +11,11 @@ import 'rxjs/Rx';
 export class HttpService{    
 
    private targetUrl:string = 'https://udemy-angular-http-33434.firebaseio.com/recipes.json';
- 
+       
     constructor(private httpService:Http,
                 private newHttpService:HttpClient){}
-    
-    /*public storeRecipes(recipes:Recipe[]):Observable<Response>{
-        return this.httpService.put(this.targetUrl, recipes);        
-    }
-
-    
-    public loadRecipes():Observable<Response>{
-        this.newHttpService.get<Recipe[]>(this.targetUrl, { observe: 'body',
-                                                            responseType: 'json'}).subscribe((data:Recipe[])=>{
-                                                                console.log(data);
-                                                            });
-        
-        return this.httpService.get(this.targetUrl);
-    }*/
-
-    public loadRecipes(){
+  
+    public loadRecipes():Observable<Recipe[]>{
         /*const request=new HttpRequest("GET", this.targetUrl, { 
                                                                 observe: 'body',
                                                                 responseType: 'json',
@@ -38,24 +24,30 @@ export class HttpService{
                                                                });*/
        // this.newHttpService.request(request).subscribe((data: HttpResponse<Recipe>)=>console.log(data));
 
-        return this.newHttpService.get<Recipe[]>(this.targetUrl, { 
-                                                            observe: 'body',
-                                                            responseType: 'json'
-                                                        }
-                                                    ).map(
-                                                            (recipes:Recipe[])=>{
-                                                                for(let x of recipes){
-                                                                    if(!x.ingridients)
-                                                                    {
-                                                                        x.ingridients =[];
-                                                                    }
-                                                                }                                                                      
-                                                                 return recipes;
-                                                                }
-                                                            );                                                             
+        return this.newHttpService.get<Recipe[]>(
+            this.targetUrl, { 
+                                observe: 'body',
+                                responseType: 'json'
+                            }
+                        ).map(                                                            
+                            (recipes:Recipe[])=>{                                                                
+                                for(let x of recipes){                                                                   
+                                    if(!x.ingridients)                                                                 
+                                    {                                                                 
+                                        x.ingridients =[];                                                                 
+                                    }                                                               
+                                }
+                                return recipes;                                                              
+                            }            
+                        );                                                             
     }                                                            
 
     public storeRecipes(recipes:Recipe[]):Observable<Recipe[]>{
         return this.newHttpService.put<Recipe[]>(this.targetUrl, recipes);
     }
+      
+    /*public storeRecipes(recipes:Recipe[]):Observable<Response>{
+        return this.httpService.put(this.targetUrl, recipes);        
+    }*/     
+
 }

@@ -36,26 +36,13 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
 
   onFetchDataClicked(){
-   /*this.httpService.loadRecipes().map(
-      (response:Response)=>{
-        let recipes:Recipe[] = <Recipe[]>(response.json());
-        for(let x of recipes){
-          if(!x.ingridients)
-          {
-            x.ingridients =[];
-          }
-        }
-        return recipes;
-      }
-    ).subscribe(
-      (response:Recipe[])=>{        
+   this.httpService.loadRecipes()
+   .subscribe(
+      (response:Recipe[])=>{    
+        //console.log(response);
         this.recipeService.putRecipes(response);
       }
-    );   */
-    this.httpService.loadRecipes().subscribe(
-      (recipes: Recipe[])=>{
-        console.log(recipes);
-      });    
+    );   
   }
 
   /*onSaveDataClicked(){

@@ -3,10 +3,11 @@ import { RecipeService } from '../../recipes/services/recipe.service';
 import { HttpService } from '../../shared/http.service';
 import { Response } from '@angular/http';
 import { Recipe } from '../../recipes/recipe.model';
-import 'rxjs';
+
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+
 import { AuthService } from '../../auth/auth.service';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -39,18 +40,17 @@ export class HeaderComponent implements OnInit,OnDestroy {
    this.httpService.loadRecipes()
    .subscribe(
       (response:Recipe[])=>{    
-        //console.log(response);
         this.recipeService.putRecipes(response);
       }
     );   
   }
 
-  /*onSaveDataClicked(){
+  onSaveDataClicked(){
     this.httpService.storeRecipes(this.recipeService.getRecipes()).subscribe(
-      (response:Response)=>{
-        console.log(response);
-      }
-    )*/  
+      (recipes:Recipe[])=>{
+        console.log(recipes);        
+      });
+    }
 
   logoutButtonClicked(){
     this.authService.logoutUser();

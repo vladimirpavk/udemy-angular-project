@@ -23,7 +23,6 @@ export class HttpService{
                                                                 reportProgress: true                                                              
                                                                });*/
        // this.newHttpService.request(request).subscribe((data: HttpResponse<Recipe>)=>console.log(data));
-
         return this.newHttpService.get<Recipe[]>(
             this.targetUrl, { 
                                 observe: 'body',

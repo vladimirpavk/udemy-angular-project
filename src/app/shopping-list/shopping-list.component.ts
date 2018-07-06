@@ -12,9 +12,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
-  public ingridients: Observable<{
-    ingridients: Ingridient[]
-  }>;
+  public ingridients: Ingridient[];
 
   private subs:Subscription;
 
@@ -23,14 +21,16 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }}>) { }
 
   ngOnInit() {
-    this.ingridients=this.store.select('shoppingList');
+    //bthis.ingridients=this.store.select('shoppingList');
     //this.ingridients=this.shoppingListService.getIngridients();
     this.subs = this.shoppingListService.newIngridientAdded.subscribe(
       (ingridients:Ingridient[])=>{
-        this.ingridients=ingridients;
+        this.ingridients=ingridients;       
       }
     )
   }
+
+ 
 
   ngOnDestroy() {
     this.subs.unsubscribe();

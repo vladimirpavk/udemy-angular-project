@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducers';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +25,9 @@ export class HeaderComponent implements OnInit,OnDestroy {
   constructor(private recipeService: RecipeService,
               private httpService: HttpService,
               private authService: AuthService,
-              private router: Router  ) { }
+              private router: Router,
+              private store: Store<fromApp.AppState>
+            ) { }
 
   ngOnInit() {    
     this.subs = this.authService.loggedInStatusChanged.subscribe(

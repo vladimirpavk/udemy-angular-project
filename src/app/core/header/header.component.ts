@@ -11,6 +11,7 @@ import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducers';
+import * as fromAuth from '../../auth/store/auth.reducers';
 
 @Component({
   selector: 'app-header',
@@ -21,6 +22,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   private isLoggedIn: boolean = false;
   private subs:Subscription;
+
+  private authStore: Observable<fromAuth.AuthState>;
 
   constructor(private recipeService: RecipeService,
               private httpService: HttpService,
@@ -33,7 +36,9 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.subs = this.authService.loggedInStatusChanged.subscribe(
       (status: boolean)=>{
         this.isLoggedIn=status;       
-    })
+    });
+
+    this.authStore=this.store.select('authState');
   }
 
   ngOnDestroy(){

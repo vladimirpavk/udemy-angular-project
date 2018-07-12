@@ -33,11 +33,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
             ) { }
 
   ngOnInit() {    
-    this.subs = this.authService.loggedInStatusChanged.subscribe(
-      (status: boolean)=>{
-        this.isLoggedIn=status;       
-    });
-
+    
     this.authStore=this.store.select('authState');
   }
 

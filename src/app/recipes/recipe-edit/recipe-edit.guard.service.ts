@@ -1,16 +1,25 @@
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Injectable } from "@angular/core";
-import { AuthService } from "../../auth/auth.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../store/app.reducers";
+import { AuthState } from "../../auth/store/auth.reducers";
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class RecipeEditGuard implements CanActivate {
 
-    constructor(private authService:AuthService){}
+    constructor(private store:Store<AppState>){}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean{
-        if( this.authService.userLoggedIn ){
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean>{
+        
+        //Ovo treba druačije da se napišse
+        /*if( this.store.select('authState')['userLoggedIn'] ){
             return true;
         }
-        return false;
+        return false;*/
+
+        return this.store.select('authState').map((authState:AuthState)=>{
+            return authState.userLoggedIn;
+        });
     }
 }

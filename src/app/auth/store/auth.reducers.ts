@@ -1,13 +1,13 @@
 import * as AuthActions from './auth.actions';
 
 export interface AuthState{
-     userLoggedIn : boolean,
-     token: string
+     "userLoggedIn" : boolean,
+     "token": string
 }
 
 const initialState:AuthState = {
-    userLoggedIn : false,
-    token : ''
+    "userLoggedIn" : false,
+    "token" : ''
 }
 
 export function reducer(state=initialState, action:AuthActions.AuthActions){
@@ -18,7 +18,7 @@ export function reducer(state=initialState, action:AuthActions.AuthActions){
         case(AuthActions.SIGN_IN_USER):{
             return {
                 ...state,
-                userLoggedIn: true
+                userLoggedIn: true                
             }
         }
         case(AuthActions.LOGOUT_USER):{
@@ -26,6 +26,12 @@ export function reducer(state=initialState, action:AuthActions.AuthActions){
                 ...state,
                 userLoggedIn: false,
                 token: ''
+            }
+        }
+        case(AuthActions.SET_TOKEN):{
+            return{
+                ...state,
+                "token": (<AuthActions.SetToken>action).payload
             }
         }
         default:{

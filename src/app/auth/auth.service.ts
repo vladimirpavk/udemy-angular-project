@@ -15,39 +15,30 @@ export class AuthService{
 
     public signupUser(email: string, password: string){
         firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(
-                (ok)=>{
-                    //console.log(ok)
-                    this.store.dispatch(new AuthActions.SignUpUser());
-                })
-            .catch(
-                (err)=>{
-                    console.log(err)
-                });
+        .then((user)=>{            
+            this.store.dispatch(new AuthActions.SignUpUser());
+            firebase.auth().currentUser.getToken()
+                .then((token:string)=>{
+                    this.store.dispatch(new AuthActions.SetToken(token));
+                })            
+        })
+        .catch((err)=>{
+              console.log(err);
+        });
     }
 
     public signinUser(email: string, password: string){
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((ok)=>{
-            this.store.dispatch(new AuthActions.SignUpUser())
-
-                /*this.userLoggedIn = true;
-                this.loggedInStatusChanged.next(true);
-                this.token=ok.G*/
-                
+            this.store.dispatch(new AuthActions.SignUpUser())        
             this.store.dispatch(new AuthActions.SetToken(ok.G));
         })
         .catch((err)=>{
-            /*this.userLoggedIn = false;
-            this.loggedInStatusChanged.next(false);*/
-            this.store.dispatch(new AuthActions.LogOutUser());
+              this.store.dispatch(new AuthActions.LogOutUser());
         });
     }
 
     public logoutUser(){
-        /*this.userLoggedIn = false;
-        this.token = '';
-        this.loggedInStatusChanged.next(false);*/
-        this.store.dispatch(new AuthActions.LogOutUser());
+         this.store.dispatch(new AuthActions.LogOutUser());
     }
 }

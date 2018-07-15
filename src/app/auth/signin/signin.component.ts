@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
 import { Observable } from 'rxjs/Observable';
 import * as AuthReducer from '../store/auth.reducers';
+import * as AuthActions from '../store/auth.actions';
 
 @Component({
   selector: 'app-signin',
@@ -18,7 +18,7 @@ export class SigninComponent implements OnInit {
 
   private loggedInStatusChanged:Observable<AppState["authState"]>;
 
-  constructor(private authService:AuthService,
+  constructor(
               private router: Router,
               private store: Store<AppState>
             ) { }
@@ -42,7 +42,8 @@ export class SigninComponent implements OnInit {
   }
 
   formSubmitted(form: NgForm){
-    this.authService.signinUser(form.value.email, form.value.password);
+    //this.authService.signinUser(form.value.email, form.value.password);   
+    this.store.dispatch(new AuthActions.TrySignInUser({username:form.value.email, password:form.value.password}));
   }
 
 }

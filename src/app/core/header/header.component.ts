@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
+import * as AuthAction from '../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -58,7 +59,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
     }
 
   logoutButtonClicked(){
-    this.authService.logoutUser();
-    this.router.navigate(['/recipes']);
+    //this.authService.logoutUser();
+    this.store.dispatch(new AuthAction.LogOutUser());
+    this.router.navigate(['/']);
   }
 }

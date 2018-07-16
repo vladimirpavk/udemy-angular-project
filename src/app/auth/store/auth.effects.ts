@@ -40,11 +40,13 @@ export class AuthEffects{
             (payload:{username:string, password:string})=>{
                 return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.username, payload.password));
             }
-        )
+        )         
         .switchMap(()=>{
+            console.log("Switch map");
             return fromPromise(firebase.auth().currentUser.getIdToken());
         })
-        .mergeMap((token:string)=>{           
+        .mergeMap((token:string)=>{      
+            console.log("Where is token: " + token);
             return [
                 {
                     type:AuthActions.SIGN_IN_USER

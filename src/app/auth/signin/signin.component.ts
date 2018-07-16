@@ -35,7 +35,12 @@ export class SigninComponent implements OnInit {
         }
         else
         {
-          this.logInError = true;
+          if(!status["tryiedToLogIn"]){
+            this.logInError = false;
+          }
+          else{
+            this.logInError = true;
+          }          
         }
       }
     )
@@ -43,6 +48,7 @@ export class SigninComponent implements OnInit {
 
   formSubmitted(form: NgForm){
     //this.authService.signinUser(form.value.email, form.value.password);   
+    console.log("Try sign in");
     this.store.dispatch(new AuthActions.TrySignInUser({username:form.value.email, password:form.value.password}));
   }
 

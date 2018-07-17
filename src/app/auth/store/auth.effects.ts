@@ -34,13 +34,25 @@ export class AuthEffects{
 
     @Effect() public authSignin =  this.actions.ofType(AuthActions.TRY_SIGN_IN_USER)
         .map((action: AuthActions.TrySignInUser)=>{
+            console.log("First step");
             return (<AuthActions.TrySignInUser>action).payload
         })
         .switchMap(
             (payload:{username:string, password:string})=>{
+                console.log("Trying to signin");
                 return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.username, payload.password));
             }
-        )         
+        )    
+        /*.subscribe(
+            (next)=>{
+                console.log("User signed in...");
+                return fromPromise(firebase.auth().currentUser.getIdToken());
+            },
+            (err)=>{
+                console.log("Error during authentification");
+            }
+        );
+        */
         .switchMap(()=>{
             console.log("Switch map");
             return fromPromise(firebase.auth().currentUser.getIdToken());

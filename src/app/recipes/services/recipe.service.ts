@@ -45,7 +45,7 @@ export class RecipeService{
         this.recipesChanged.next(this.recipes.slice());
     }
 
-    public deleteRecipe(recipe:Recipe){
+    public deleteRecipe(recipe:Recipe):void{
        let newArray:Recipe[] = this.recipes.filter(
             (element:Recipe)=>{                
                 if(element.name!==recipe.name){                    

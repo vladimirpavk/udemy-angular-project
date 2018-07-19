@@ -10,7 +10,7 @@
         <div class="panel panel-info">
             <div class="panel panel-heading">Recipe Item Components List</div>
             <div class="panel-body">
-              <div class="row"  *ngFor="let recipe of recipes; let i = index">    
+              <div class="row"  *ngFor="let recipe of (recipes | async).recipes; let i = index">    
                  <!-- <app-recipe-item [recipe]="recipe" (click)="recipeItemClicked(recipe)"></app-recipe-item> -->
                  <a  [routerLink]="i"><app-recipe-item [recipe]="recipe" routerLinkActive="active" style="background: blue;"></app-recipe-item></a>
               </div>

@@ -39,7 +39,7 @@ export function reducer(state=initialState, action:RecipesActions.RecipesActions
         }
         case(RecipesActions.DELETE_RECIPE):{
             let recipe = (<RecipesActions.DeleteRecipeAction>action).payload;
-            let newArray:Recipe[] = this.recipes.filter(
+            let newArray:Recipe[] = state.recipes.filter(
                 (element:Recipe)=>{                
                     if(element.name!==recipe.name){                    
                         return true;

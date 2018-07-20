@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
 import { Observable } from 'rxjs/Observable';
 import { take } from 'rxjs/operators'
+import * as RecipeActions from '../store/recipes.actions';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -43,8 +44,10 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   deleteRecipe(){
-    /*this.recipeService.deleteRecipe(this.recipe);
-    this.router.navigate(['../']);*/
+    //use code below when using services
+    //this.recipeService.deleteRecipe(this.recipe);
+    this.store.dispatch(new RecipeActions.DeleteRecipeAction(this.recipe));
+    this.router.navigate(['../']);
   }
 
   private toShoppingListClicked():void{

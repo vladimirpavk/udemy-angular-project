@@ -1,13 +1,13 @@
 import * as AuthActions from './auth.actions';
 
 export interface AuthState{
-    "tryiedToLogIn" : boolean,
+    "alreadyAttemptedToLogIn" : boolean,
      "userLoggedIn" : boolean,
      "token": string
 }
 
 const initialState:AuthState = {
-    "tryiedToLogIn" : false,
+    "alreadyAttemptedToLogIn" : false,
     "userLoggedIn" : false,
     "token" : ''
 }
@@ -21,6 +21,12 @@ export function reducer(state=initialState, action:AuthActions.AuthActions){
             return {
                 ...state,
                 "userLoggedIn": true,                            
+            }
+        }
+        case(AuthActions.FIRST_TIME_SIGN_IN_USER):{
+            return {
+                ...state,
+                "alreadyAttemptedToLogIn": true;
             }
         }
         case(AuthActions.LOGOUT_USER):{

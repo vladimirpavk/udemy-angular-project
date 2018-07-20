@@ -14,7 +14,7 @@ import * as AuthActions from '../store/auth.actions';
 })
 export class SigninComponent implements OnInit {
 
-  private logInError = false;
+  private logInError:boolean = false;
 
   private loggedInStatusChanged:Observable<AppState["authState"]>;
 
@@ -35,7 +35,7 @@ export class SigninComponent implements OnInit {
         }
         else
         {
-          if(!status["tryiedToLogIn"]){
+          if(!status["alreadyAttemptedToLogIn"]){
             this.logInError = false;
           }
           else{

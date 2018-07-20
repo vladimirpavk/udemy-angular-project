@@ -37,28 +37,50 @@ export class AuthEffects{
             console.log("First step");
             return (<AuthActions.TrySignInUser>action).payload
         })
-        .switchMap(
+        .switchMap((payload: {username:string, password:string})=>{
+            return firebase.auth().signInWithEmailAndPassword(payload.username, payload.password)
+               .then((user:any)=>{
+                return [
+                    {
+                        type:AuthActions.FIRST_TIME_SIGN_IN_USER
+                    },
+                    {
+                        type:AuthActions.SIGN_IN_USER
+                    },
+                    {
+                        type:AuthActions.SET_TOKEN,
+                        payload: user.G
+                    }
+                ]                
+               })
+               .catch((err)=>{
+                   return{
+                       type:AuthActions.FIRST_TIME_SIGN_IN_USER
+                   }
+               })
+        });
+        
+        
+        
+        /*.switchMap(
             (payload:{username:string, password:string})=>{
                 console.log("Trying to signin");
-                return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.username, payload.password));
+               // return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.username, payload.password));
+               firebase.auth().signInWithEmailAndPassword(payload.username, payload.password)
+               .then(()=>{
+
+               })
+               .catch((err)=>{
+                   console.log(err);
+               })
             }
         )    
-        /*.subscribe(
-            (next)=>{
-                console.log("User signed in...");
-                return fromPromise(firebase.auth().currentUser.getIdToken());
-            },
-            (err)=>{
-                console.log("Error during authentification");
-            }
-        );
-        */
         .switchMap(()=>{
             console.log("Switch map");
             return fromPromise(firebase.auth().currentUser.getIdToken());
         })
         .mergeMap((token:string)=>{      
-            console.log("Where is token: " + token);
+            console.log("Where the token is: " + token);
             return [
                 {
                     type:AuthActions.SIGN_IN_USER
@@ -68,7 +90,7 @@ export class AuthEffects{
                     payload: token
                 }
             ]
-        });
+        });*/
 
     constructor(private actions:Actions){}
 }

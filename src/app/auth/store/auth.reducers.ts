@@ -26,7 +26,7 @@ export function reducer(state=initialState, action:AuthActions.AuthActions){
         case(AuthActions.FIRST_TIME_SIGN_IN_USER):{
             return {
                 ...state,
-                "alreadyAttemptedToLogIn": true;
+                "alreadyAttemptedToLogIn": true
             }
         }
         case(AuthActions.LOGOUT_USER):{

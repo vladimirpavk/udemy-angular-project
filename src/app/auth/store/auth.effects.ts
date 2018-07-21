@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import * as AuthActions from './auth.actions';
 import * as firebase from 'firebase';
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthEffects{
@@ -37,21 +38,25 @@ export class AuthEffects{
             console.log("First step");
             return (<AuthActions.TrySignInUser>action).payload
         })
-        .switchMap((payload: {username:string, password:string})=>{
+        .mergeMap((payload: {username:string, password:string})=>{
             return firebase.auth().signInWithEmailAndPassword(payload.username, payload.password)
                .then((user:any)=>{
-                return [
+                return Observable.from([ 
                     {
-                        type:AuthActions.FIRST_TIME_SIGN_IN_USER
+                        "type": AuthActions.FIRST_TIME_SIGN_IN_USER
                     },
                     {
-                        type:AuthActions.SIGN_IN_USER
+                        "type": AuthActions.SIGN_IN_USER
                     },
                     {
-                        type:AuthActions.SET_TOKEN,
-                        payload: user.G
+                        "type": AuthActions.SET_TOKEN,
+                        "payload": user.G
                     }
-                ]                
+                ])
+                /*return{
+                    type:AuthActions.SET_TOKEN,
+                    payload: user.G
+                }*/            
                })
                .catch((err)=>{
                    return{

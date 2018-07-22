@@ -1,12 +1,16 @@
-import { Effect, Actions } from '@ngrx/effects';
+import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import * as AuthActions from './auth.actions';
 import * as firebase from 'firebase';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthEffects{
+
+    constructor(private actions:Actions){}
 
     @Effect() public authSignup = 
     this.actions.ofType(AuthActions.TRY_SIGN_UP_USER)
@@ -33,7 +37,35 @@ export class AuthEffects{
         ]
     });
 
-    @Effect() public authSignin =  this.actions.ofType(AuthActions.TRY_SIGN_IN_USER)
+    @Effect() public authSignin = 
+    this.actions.pipe(
+        ofType(AuthActions.TRY_SIGN_IN_USER),
+        map((action:AuthActions.TrySignInUser)=>{
+            console.log("First map");
+            return (<AuthActions.TrySignInUser>action).payload;
+        }),
+        switchMap((payload: {username:string, password:string})=>{
+            return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.username, payload.password));
+        }),
+        switchMap((user:any)=>{
+            return [ 
+                {
+                    "type": AuthActions.FIRST_TIME_SIGN_IN_USER
+                },
+                {
+                    "type": AuthActions.SIGN_IN_USER
+                },
+                {
+                    "type": AuthActions.SET_TOKEN,
+                    "payload": user.G
+                }
+            ]
+        }),
+        catchError((err:any)=>{
+            return of(new AuthActions.FirstTimeSignInUser());
+        })
+
+   /* @Effect() public authSignin =  this.actions.ofType(AuthActions.TRY_SIGN_IN_USER)
         .map((action: AuthActions.TrySignInUser)=>{
             console.log("First step");
             return (<AuthActions.TrySignInUser>action).payload
@@ -56,14 +88,14 @@ export class AuthEffects{
                 /*return{
                     type:AuthActions.SET_TOKEN,
                     payload: user.G
-                }*/            
+                }          
                })
                .catch((err)=>{
                    return{
                        type:AuthActions.FIRST_TIME_SIGN_IN_USER
                    }
                })
-        });
+        });*/
         
         
         
@@ -97,5 +129,5 @@ export class AuthEffects{
             ]
         });*/
 
-    constructor(private actions:Actions){}
+    
 }

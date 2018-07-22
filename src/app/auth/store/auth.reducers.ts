@@ -33,7 +33,7 @@ export function reducer(state=initialState, action:AuthActions.AuthActions){
             return {
                 ...state,
                 "userLoggedIn": false,
-                "tryiedToLogIn": false,
+                "alreadyAttemptedToLogIn": false,
                 "token": ''
             }
         }

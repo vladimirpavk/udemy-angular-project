@@ -5,6 +5,8 @@ export const ADD_RECIPE : string = 'ADD_RECIPE';
 export const DELETE_RECIPE : string = 'DELETE_RECIPE';
 export const UPDATE_RECIPE : string = 'UPDATE_RECIPE';
 export const PUT_RECIPES : string = 'PUT_RECIPES';
+export const LOAD_RECIPES : string = 'LOAD_RECIPES';
+export const STORE_RECIPES : string = 'STORE_RECIPES';
 
 export class AddRecipeAction implements Action{
     public readonly type:string = ADD_RECIPE;
@@ -29,4 +31,13 @@ export class PutRecipesAction implements Action{
     constructor(public payload:Recipe[]){}
 }
 
-export type RecipesActions = AddRecipeAction | DeleteRecipeAction | UpdateRecipeAction | PutRecipesAction;
+export class LoadRecipesAction implements Action{
+    public readonly type : string = LOAD_RECIPES;
+    constructor(){}
+}
+
+export class StoreRecipesAction implements Action{
+    public readonly type : string = STORE_RECIPES;
+}
+
+export type RecipesActions = AddRecipeAction | DeleteRecipeAction | UpdateRecipeAction | PutRecipesAction | LoadRecipesAction | StoreRecipesAction;

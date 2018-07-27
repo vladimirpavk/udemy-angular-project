@@ -7,7 +7,7 @@ export class RecipesEffects{
 
     private targetUrl:string = 'https://udemy-angular-http-33434.firebaseio.com/recipes.json';
 
-    constructor(private actions:Actions,
+   /* constructor(private actions:Actions,
         private newHttpService:HttpClient){
         }
 
@@ -35,5 +35,5 @@ export class RecipesEffects{
             );
 
     @Effect() public storeRecipesEffect;
-    
+    */
 }

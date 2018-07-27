@@ -23,16 +23,12 @@ import { AuthService } from './../auth/auth.service';
     imports: [
         SharedModule,
         AppRoutingModule,
-        BrowserModule,
-        StoreModule.forRoot({
-            authState: AuthReducer.reducer
-        })
+        BrowserModule
     ],
     exports: [
         AppRoutingModule,
         HomeComponent,
-        HeaderComponent,
-        StoreModule
+        HeaderComponent   
     ],
     providers : [ ShoppingListService, RecipeResolveService, RecipeService, HttpService, AuthService ]
 })

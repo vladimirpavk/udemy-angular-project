@@ -1,17 +1,20 @@
 import { Effect, Actions } from "@ngrx/effects";
-import { HttpClient, HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import * as RecipesActions from './recipes.actions';
 import { Recipe } from "../recipe.model";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class RecipesEffects{
 
     private targetUrl:string = 'https://udemy-angular-http-33434.firebaseio.com/recipes.json';
 
-   /* constructor(private actions:Actions,
-        private newHttpService:HttpClient){
+   constructor(private actions:Actions,
+            private newHttpService:HttpClient
+        ){
         }
 
-    @Effect() public loadRecipesEffect = 
+   @Effect() public loadRecipesEffect = 
         this.actions.ofType(RecipesActions.LOAD_RECIPES)
             .switchMap(
                 (action:RecipesActions.LoadRecipesAction)=>
@@ -33,7 +36,4 @@ export class RecipesEffects{
                     } 
                 }                                                                                                          
             );
-
-    @Effect() public storeRecipesEffect;
-    */
 }

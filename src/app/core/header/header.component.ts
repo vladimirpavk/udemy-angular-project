@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
 import * as AuthAction from '../../auth/store/auth.actions';
+import * as RecipesActions from '../../recipes/store/recipes.actions';
 
 @Component({
   selector: 'app-header',
@@ -43,12 +44,14 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
 
   onFetchDataClicked(){
-   this.httpService.loadRecipes()
+   /*this.httpService.loadRecipes()
    .subscribe(
       (response:Recipe[])=>{    
         this.recipeService.putRecipes(response);
       }
-    );   
+   );   */
+   console.log("Switched to ngrx/store");
+   this.store.dispatch(new RecipesActions.LoadRecipesAction());
   }
 
   onSaveDataClicked(){

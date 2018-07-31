@@ -55,10 +55,11 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
 
   onSaveDataClicked(){
-    this.httpService.storeRecipes(this.recipeService.getRecipes()).subscribe(
+    /*this.httpService.storeRecipes(this.recipeService.getRecipes()).subscribe(
       (recipes:Recipe[])=>{
         console.log(recipes);        
-      });
+      });*/
+      this.store.dispatch(new RecipesActions.StoreRecipesAction());
     }
 
   logoutButtonClicked(){

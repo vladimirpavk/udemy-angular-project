@@ -1,10 +1,13 @@
 import { Effect, Actions, ofType } from "@ngrx/effects";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import * as RecipesActions from './recipes.actions';
 import { Recipe } from "../recipe.model";
 import { Injectable } from "@angular/core";
 import { of } from 'rxjs/observable/of';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { Store } from "@ngrx/store";
+import { AppState } from "../../store/app.reducers";
+import { RecipesState } from "./recipes.reducer";
 
 @Injectable()
 export class RecipesEffects{
@@ -12,7 +15,8 @@ export class RecipesEffects{
     private targetUrl:string = 'https://udemy-angular-http-33434.firebaseio.com/recipes.json';
 
    constructor(private actions:Actions,
-            private newHttpService:HttpClient
+            private newHttpClient:HttpClient,           
+            private store:Store<AppState>
         ){
         }
 
@@ -21,7 +25,7 @@ export class RecipesEffects{
             ofType(RecipesActions.LOAD_RECIPES),
             switchMap(
                 (action:RecipesActions.LoadRecipesAction)=>
-                    this.newHttpService.get<Recipe[]>(this.targetUrl, { 
+                    this.newHttpClient.get<Recipe[]>(this.targetUrl, { 
                                                                         observe: 'body',
                                                                         responseType: 'json'
                     }).pipe(
@@ -41,4 +45,16 @@ export class RecipesEffects{
                                 return of(new RecipesActions.LoadRecipesErrorAction());
                             }))
                         ));
+    
+    @Effect({dispatch:false}) public storeRecipesEffect =
+        this.actions.pipe(
+            ofType(RecipesActions.STORE_RECIPES),
+            withLatestFrom(this.store.select('recipeState')),
+            switchMap(
+                ([action, state])=>{
+                    const req=new HttpRequest('PUT', this.targetUrl, state.recipes, {reportProgress:true});
+                    return this.newHttpClient.request(req);
+                }
+            )
+        );
 }

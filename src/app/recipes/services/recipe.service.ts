@@ -2,7 +2,7 @@ import { EventEmitter } from '@angular/core';
 
 import { Recipe } from '../recipe.model';
 import { Ingridient } from '../../shared/ingridient.model';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs/';
 
 
 export class RecipeService{

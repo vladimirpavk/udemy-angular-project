@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy, ViewChild } from '@
 import { Ingridient } from '../../shared/ingridient.model';
 import { ShoppingListService } from '../services/shopping-list.service';
 import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-edit',

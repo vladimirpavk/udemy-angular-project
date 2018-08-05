@@ -2,10 +2,8 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import * as AuthActions from './auth.actions';
 import * as firebase from 'firebase';
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { catchError, map, switchMap, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthEffects{
@@ -13,19 +11,20 @@ export class AuthEffects{
     constructor(private actions:Actions){}
 
     @Effect() public authSignup = 
-    this.actions.ofType(AuthActions.TRY_SIGN_UP_USER)
-    .map((action: AuthActions.TrySignUpUser)=>{
+    this.actions.pipe(
+    ofType(AuthActions.TRY_SIGN_UP_USER),
+    map((action: AuthActions.TrySignUpUser)=>{
         return (<AuthActions.TrySignUpUser>action).payload
-    })
-    .switchMap(
+    }),
+    switchMap(
         (payload:{username:string, password:string})=>{
-            return fromPromise(firebase.auth().createUserWithEmailAndPassword(payload.username, payload.password))
+            return from(firebase.auth().createUserWithEmailAndPassword(payload.username, payload.password))
         }
-    )
-    .switchMap(()=>{
-        return fromPromise(firebase.auth().currentUser.getIdToken())
-    })
-    .mergeMap((token:string)=>{
+    ),
+    switchMap(()=>{
+        return from(firebase.auth().currentUser.getIdToken())
+    }),
+    mergeMap((token:string)=>{
         return [
             {
                 type:AuthActions.SIGN_UP_USER
@@ -35,7 +34,7 @@ export class AuthEffects{
                 payload: token
             }
         ]
-    });
+    }));
 
     @Effect() public authSignin = 
     this.actions.pipe(
@@ -45,7 +44,7 @@ export class AuthEffects{
             return (<AuthActions.TrySignInUser>action).payload;
         }),
         switchMap((payload: {username:string, password:string})=>{
-            return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.username, payload.password)).pipe(
+            return from(firebase.auth().signInWithEmailAndPassword(payload.username, payload.password)).pipe(
                 switchMap((user:any)=>{
                     return [ 
                         new AuthActions.FirstTimeSignInUser(),

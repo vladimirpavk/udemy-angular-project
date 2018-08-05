@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as AuthReducer from '../store/auth.reducers';
 import * as AuthActions from '../store/auth.actions';
 

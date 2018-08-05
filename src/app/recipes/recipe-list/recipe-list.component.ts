@@ -1,10 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../services/recipe.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
-import { Observable } from 'rxjs/Observable'
 
 @Component({
   selector: 'app-recipe-list',

@@ -6,7 +6,7 @@ import { ActivatedRoute, Data, Params, Router } from '@angular/router';
 import { RecipeService } from '../services/recipe.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducers';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators'
 import * as RecipeActions from '../store/recipes.actions';
 
@@ -35,11 +35,13 @@ export class RecipeDetailComponent implements OnInit {
       //when using services uncomment
       //this.recipe=this.recipeService.getRecipeById(this.recipeId);
       this.recipeState = this.store.select('recipeState');
-      this.recipeState.take(1).subscribe(
-        (state:AppState["recipeState"])=>{
-          this.recipe=state.recipes[+params['id']];
-        }
-      );
+      this.recipeState.pipe(
+        take(1))
+        .subscribe(
+          (state:AppState["recipeState"])=>{
+            this.recipe=state.recipes[+params['id']];
+          }
+        );
     });
   }
 

@@ -3,7 +3,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import * as RecipesActions from './recipes.actions';
 import { Recipe } from "../recipe.model";
 import { Injectable } from "@angular/core";
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from "@ngrx/store";
 import { AppState } from "../../store/app.reducers";

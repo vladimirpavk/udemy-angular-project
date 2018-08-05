@@ -3,7 +3,8 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../store/app.reducers";
 import { AuthState } from "../../auth/store/auth.reducers";
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class RecipeEditGuard implements CanActivate {
@@ -18,8 +19,9 @@ export class RecipeEditGuard implements CanActivate {
         }
         return false;*/
 
-        return this.store.select('authState').map((authState:AuthState)=>{
+        return this.store.select('authState').pipe(
+            map((authState:AuthState)=>{
             return authState.userLoggedIn;
-        });
+        }));
     }
 }

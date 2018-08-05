@@ -4,8 +4,7 @@ import { HttpService } from '../../shared/http.service';
 import { Response } from '@angular/http';
 import { Recipe } from '../../recipes/recipe.model';
 
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable, Subscription } from 'rxjs';
 
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';

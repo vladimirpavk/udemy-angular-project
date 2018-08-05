@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 
 import { Recipe } from '../recipes/recipe.model';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class HttpService{    
@@ -28,7 +28,7 @@ export class HttpService{
                                 observe: 'body',
                                 responseType: 'json'
                             }
-                        ).map(                                                            
+                        ).pipe(map(                                                            
                             (recipes:Recipe[])=>{                                                                
                                 for(let x of recipes){                                                                   
                                     if(!x.ingridients)                                                                 
@@ -38,7 +38,7 @@ export class HttpService{
                                 }
                                 return recipes;                                                              
                             }            
-                        );                                                             
+                        ));                                                             
     }                                                            
 
     public storeRecipes(recipes:Recipe[]):Observable<Recipe[]>{

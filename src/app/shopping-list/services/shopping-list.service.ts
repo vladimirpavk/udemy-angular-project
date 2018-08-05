@@ -1,7 +1,7 @@
 import { Output } from '@angular/core';
 
 import { Ingridient } from '../../shared/ingridient.model';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 export class ShoppingListService{
 

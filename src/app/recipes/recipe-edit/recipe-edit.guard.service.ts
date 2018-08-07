@@ -11,16 +11,12 @@ export class RecipeEditGuard implements CanActivate {
 
     constructor(private store:Store<AppState>){}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean>{
-        
-        //Ovo treba druačije da se napišse
-        /*if( this.store.select('authState')['userLoggedIn'] ){
-            return true;
-        }
-        return false;*/
-
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean>{             
         return this.store.select('authState').pipe(
             map((authState:AuthState)=>{
+                if(!authState.userLoggedIn){
+                    alert("User not logged in...");
+                }               
             return authState.userLoggedIn;
         }));
     }

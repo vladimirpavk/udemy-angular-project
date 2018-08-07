@@ -10,32 +10,46 @@
           <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="name">Name</label>
+            <!--<label for="name">Name</label>
             <input
               type="text"
               id="name"
               formControlName="name"
-              class="form-control">
+              class="form-control">-->
+              <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Password"
+                    type="text"                    
+                    formControlName="name"                    
+                    required 
+                    class="form-control">
+              </mat-form-field>
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
             <label for="imagePath">Image URL</label>
-            <input
-              type="text"
-              id="imagePath"
-              formControlName="imagePath"
-              class="form-control"
-              style="max-height: 300px;"
-              #imagePath>
+            
+              <input
+                matInput
+                type="text"
+                id="imagePath"
+                formControlName="imagePath"
+                class="form-control"
+                style="max-height: 300px;"
+                #imagePath>
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs-12">
           <img [src]="imagePath.value" class="img-responsive">

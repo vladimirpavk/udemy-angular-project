@@ -13,8 +13,6 @@ import { RecipeService } from './../recipes/services/recipe.service';
 import { HttpService } from './../shared/http.service';
 import { AuthService } from './../auth/auth.service';
 
-
-
 @NgModule({
     declarations: [
         HomeComponent,

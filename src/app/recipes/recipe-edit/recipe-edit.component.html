@@ -13,17 +13,11 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <div class="form-group">
-            <!--<label for="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              formControlName="name"
-              class="form-control">-->
+          <div class="form-group">            
               <mat-form-field>
                   <input
                     matInput
-                    placeholder="Password"
+                    placeholder="Recipe name"
                     type="text"                    
                     formControlName="name"                    
                     required 
@@ -35,17 +29,16 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <div class="form-group">
-            <label for="imagePath">Image URL</label>
-            
+          <div class="form-group">            
+            <mat-form-field>
               <input
                 matInput
-                type="text"
-                id="imagePath"
+                type="text"                
                 formControlName="imagePath"
-                class="form-control"
-                style="max-height: 300px;"
+                class="form-control"                
+                placeholder="Image URL:"
                 #imagePath>
+            </mat-form-field>
           </div>
         </div>
       </div>
@@ -55,19 +48,22 @@
           <img [src]="imagePath.value" class="img-responsive">
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs-12">
-          <div class="form-group">
-            <label for="description">Description</label>
+          <mat-form-field class="form-group">            
             <textarea
+              matInput
+              placeholder="Description"
               type="text"
               id="description"
               class="form-control"
               formControlName="description"
               rows="6"></textarea>
-          </div>
+          </mat-form-field>
         </div>
       </div>
+      
       <div class="row">
         <div class="col-xs-12" formArrayName="ingridients">
           <div
